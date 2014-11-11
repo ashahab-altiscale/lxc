@@ -35,43 +35,44 @@ struct lxc_conf;
 struct lxc_handler;
 
 struct lxc_operations {
-	int (*start)(struct lxc_handler *, void *);
-	int (*post_start)(struct lxc_handler *, void *);
+    int (*start)(struct lxc_handler *, void *);
+    int (*post_start)(struct lxc_handler *, void *);
 };
 
 struct cgroup_desc;
 
 enum {
-	LXC_NS_MNT,
-	LXC_NS_PID,
-	LXC_NS_UTS,
-	LXC_NS_IPC,
-	LXC_NS_USER,
-	LXC_NS_NET,
-	LXC_NS_MAX
+    LXC_NS_MNT,
+    LXC_NS_PID,
+    LXC_NS_UTS,
+    LXC_NS_IPC,
+    LXC_NS_USER,
+    LXC_NS_NET,
+    LXC_NS_NET_PATH,
+    LXC_NS_MAX
 };
 
 struct ns_info {
-	const char *proc_name;
-	int clone_flag;
+    const char *proc_name;
+    int clone_flag;
 };
 
 extern const struct ns_info ns_info[LXC_NS_MAX];
 
 struct lxc_handler {
-	pid_t pid;
-	char *name;
-	lxc_state_t state;
-	int clone_flags;
-	int sigfd;
-	sigset_t oldmask;
-	struct lxc_conf *conf;
-	struct lxc_operations *ops;
-	void *data;
-	int sv[2];
-	int pinfd;
-	const char *lxcpath;
-	void *cgroup_data;
+    pid_t pid;
+    char *name;
+    lxc_state_t state;
+    int clone_flags;
+    int sigfd;
+    sigset_t oldmask;
+    struct lxc_conf *conf;
+    struct lxc_operations *ops;
+    void *data;
+    int sv[2];
+    int pinfd;
+    const char *lxcpath;
+    void *cgroup_data;
 };
 
 
@@ -83,7 +84,7 @@ extern void lxc_fini(const char *name, struct lxc_handler *handler);
 
 extern int lxc_check_inherited(struct lxc_conf *conf, int fd_to_ignore);
 int __lxc_start(const char *, struct lxc_conf *, struct lxc_operations *,
-		void *, const char *);
+        void *, const char *);
 
 #endif
 
