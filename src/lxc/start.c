@@ -806,7 +806,7 @@ static int lxc_spawn(struct lxc_handler *handler)
 		handler->clone_flags |= CLONE_NEWUSER;
 	}
 
-	if (handler->conf->inherit_ns_fd[LXC_NS_NET] == -1) {
+	if (handler->conf->inherit_ns_fd[LXC_NS_NET] == -1 && handler->conf->inherit_ns_fd[LXC_NS_NET_PATH] == -1) {
 		if (!lxc_requests_empty_network(handler))
 			handler->clone_flags |= CLONE_NEWNET;
 
